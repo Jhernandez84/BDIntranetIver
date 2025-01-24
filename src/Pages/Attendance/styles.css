@@ -1,0 +1,155 @@
+img {
+  width: 25px;
+  height: 25px;
+}
+
+.d-flex,
+p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.body {
+  background-color: #000;
+}
+
+.att_present {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.att_present p {
+  text-align: left;
+  font-weight: bold;
+}
+
+.detail-container .detail-detail {
+  text-decoration: double;
+  justify-content: left;
+}
+
+.table_header {
+  padding: 25px;
+}
+
+.table_seccion {
+  max-height: calc(100vh - 370px); /* Set a fixed height for the section */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.container .attendance_section {
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+}
+
+.attendance_dashboard {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  /* Set a background color for better visibility */
+  z-index: 1;
+}
+
+.attendance-selectors {
+  width: 30%;
+  padding: 1%;
+}
+
+.attendance_dashboard .att-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.table_head {
+  position: sticky;
+  top: 0;
+  background-color: rgb(63, 118, 221);
+  /* Set a background color for better visibility */
+  z-index: 1;
+  /* Ensure it's above the table_body */
+}
+
+.table_body {
+  max-height: 400px;
+  /* Set a maximum height to enable scrolling */
+  overflow-y: auto;
+  margin-top: 50px;
+  /* Enable vertical scrolling */
+}
+
+.input-rut {
+  background-color: transparent; /* Transparent background */
+  color: black; /* Black font color */
+  border: none; /* Remove border */
+  outline: none; /* Remove the focus outline */
+}
+
+.input-rut::placeholder {
+  color: black; /* Change placeholder color to black */
+  opacity: 1; /* Ensure full opacity for the placeholder */
+}
+
+@media screen and (max-width: 767px) {
+  .att_present {
+    display: flex;
+  }
+
+  .att_chart,
+  .att_total,
+  .att_total2 {
+    display: none;
+  }
+
+  .table_head {
+    position: sticky;
+    top: 198px;
+    background-color: rgb(63, 118, 221);
+    /* Set a background color for better visibility */
+    z-index: 1;
+    /* Ensure it's above the table_body */
+  }
+
+  .hidable {
+    display: none;
+  }
+
+  th,
+  td,
+  .detail-title,
+  .detail-detail {
+    font-size: smaller;
+  }
+
+  /* .detail-title .detail-detail {
+    font-size: smaller;
+  } */
+
+  /* CSS styles for screens with a maximum width of 767px (typically for mobile devices) */
+  /* Add your mobile-specific styles here */
+}
+
+.form-check-input:hover {
+  cursor: pointer;
+}
+
+.form-select:hover {
+  cursor: pointer;
+}
+
+.lunch-paid-column {
+  min-width: 100px;
+}
+
+.lunch-paid-column .btn {
+  margin-left: 10px;
+}
