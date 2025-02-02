@@ -11,23 +11,23 @@ export const Home = () => {
   const [lrCount, setLrCount] = useState(0);
   const [entrega2Count, setEntrega2Count] = useState(0);
 
-  // useEffect(() => {
-  //   const collectionRef2 = db.collection("Act");
-  //   collectionRef2
-  //     .get()
-  //     .then((querySnapshot) => {
-  //       // Apply the filter to exclude records with EventoEstado "eliminado"
-  //       const filteredRecords = querySnapshot.docs.filter(
-  //         (record) => record.data().EventoEstado !== "eliminado"
-  //       );
-  //       const recordCount = filteredRecords.length;
-  //       setEntrega2Count(recordCount);
-  //       // console.log(`Number of records: ${recordCount}`);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error getting documents: ", error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    const collectionRef2 = db.collection("Escuela Infantil");
+    collectionRef2
+      .get()
+      .then((querySnapshot) => {
+        // Apply the filter to exclude records with EventoEstado "eliminado"
+        const filteredRecords = querySnapshot.docs.filter(
+          (record) => record.data().EventoEstado !== "eliminado"
+        );
+        const recordCount = filteredRecords.length;
+        setEntrega2Count(recordCount);
+        // console.log(`Number of records: ${recordCount}`);
+      })
+      .catch((error) => {
+        console.error("Error getting documents: ", error);
+      });
+  }, []);
 
   useEffect(() => {
     const collectionRef2 = db.collection("Escuela de Entrenamiento");
@@ -52,33 +52,48 @@ export const Home = () => {
       <section>
         <h5 className="text-center">Eventos Disponibles</h5>
       </section>
-      <section className="container text-center">
+
+      <section className="card-container text-center">
         <div className="card" style={{ width: "18rem" }}>
-          <NavLink to="/Forms">
+          <NavLink to="/Iver_EscuelaDeEntrenamiento">
             <img
-              src="/img-lyr-sinlimites.jpeg"
+              src="/Iver_esc_entrenamiento.png"
               className="card-img-top"
               alt="Escuela de Entrenamiento"
             />
           </NavLink>
           <div className="card-body">
             <h5 className="card-title">Escuela de Entrenamiento</h5>
-            <p className="card-text">Ya somos {lrCount} inscritos</p>
+            {lrCount > 1 ? (
+              <p className="card-text">Ya somos {lrCount} inscritos</p>
+            ) : lrCount === 1 ? (
+              <p className="card-text">
+                Ya hay 1 inscrito, ¿Que estás esperando?
+              </p>
+            ) : null}
           </div>
         </div>
-        {/* <div class="card" style={{ width: "18rem" }}>
-          <NavLink to="/CampamentoJuvenil">
+      </section>
+      <section className="card-container text-center">
+        <div class="card" style={{ width: "18rem" }}>
+          <NavLink to="/IverKids_EscuelaInfantil">
             <img
-              src="/CampamentoJuvenil.jpeg"
+              src="/IverKidsLogo.jpg"
               class="card-img-top"
               alt="Imagen-Contacto"
             />
           </NavLink>
           <div class="card-body">
-            <h5 class="card-title">Campamento Juvenil</h5>
-            <p class="card-text">Ya somos {entrega2Count} inscritos</p>
+            <h5 class="card-title">IverKids - Escuela Infantil</h5>
+            {entrega2Count > 1 ? (
+              <p className="card-text">Ya somos {entrega2Count} inscritos</p>
+            ) : entrega2Count === 1 ? (
+              <p className="card-text">
+                Ya hay 1 inscrito, ¿Que estás esperando?
+              </p>
+            ) : null}
           </div>
-        </div> */}
+        </div>
       </section>
     </div>
   );

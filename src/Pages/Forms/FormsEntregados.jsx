@@ -9,9 +9,9 @@ import { Help } from "../Help/Help";
 
 export const FormEntrega2 = () => {
   const DBOrigin = "BDGeneralIglesia";
-  const DBEvento = "CampamentoJuvenil";
-  const DBGrupo = "Campamento Juvenil";
-  const DBLema = "Somos un ejercito";
+  const DBEvento = "Escuela Infantil";
+  const DBGrupo = "";
+  const DBLema = "Instruye al niño en su camino";
 
   const camposContacto = {
     Rut: "",
@@ -19,6 +19,7 @@ export const FormEntrega2 = () => {
     ApellidoPaterno: "",
     ApellidoMaterno: "",
     FechaNacimiento: "",
+    RutApoderado:"",
     NumeroContacto: "",
     Accepted: false,
     DV: "",
@@ -75,20 +76,33 @@ export const FormEntrega2 = () => {
                 // If there's at least one matching record, retrieve it
                 SetUserExist(true);
                 const recordData = querySnapshot.docs[0].data();
+                const {
+                  Nombres,
+                  ApellidoPaterno,
+                  ApellidoMaterno,
+                  Rut,
+                  FechaNacimiento,
+                  NumeroContacto,
+                  RutApoderado,
+                } = recordData;
                 setContacto({
-                  ...recordData,
-                  esStaff: "No",
-                  staff: "Participante",
+                  Nombres,
+                  ApellidoPaterno,
+                  ApellidoMaterno,
+                  Rut,
+                  FechaNacimiento,
+                  NumeroContacto,
+                  RutApoderado,
+                  Asistencia: [],
                 });
               } else {
                 SetUserExist(false);
-                // No matching records found
-                // console.log('No matching records found');
               }
             });
         }
       });
   };
+
   useEffect(() => {
     contacto.Rut.length === 8 ||
     (contacto.Rut.length === 7) & (parseInt(contacto.Rut.charAt(0)) > 4)
@@ -130,7 +144,7 @@ export const FormEntrega2 = () => {
       {/* <Help/> */}
       <section className="container-fluid d-flex flex-column text-center">
         <div className="container">
-          <img src="/CampamentoJuvenil.jpeg" alt="Imagen-Contacto" />
+          <img src="/IverKidsLogo.jpg" alt="Imagen-Contacto" />
         </div>
 
         <div className="container-fluid">
@@ -191,20 +205,6 @@ export const FormEntrega2 = () => {
                     ></input>
                   </div>
                   <div className="form-input">
-                    <label htmlFor="NumeroContacto" className="form-label">
-                      Teléfono de contacto
-                    </label>
-                    <input
-                      name="NumeroContacto"
-                      onChange={getFormValues}
-                      value={contacto.NumeroContacto}
-                      type="phone"
-                      className="form-control"
-                      id="inputContactPhone"
-                      aria-describedby="inputPhone"
-                    ></input>
-                  </div>
-                  <div className="form-input">
                     <label htmlFor="FechaNacimiento" className="form-label">
                       Fecha de nacimiento
                     </label>
@@ -219,137 +219,45 @@ export const FormEntrega2 = () => {
                     ></input>
                   </div>
                   <div className="form-input">
-                    <label htmlFor="inputHorarioLlegada" className="form-label">
-                      ¿Cuantos días participarás?
+                    <label htmlFor="RutApoderado" className="form-label">
+                      Rut Apoderado
                     </label>
-                    <select
-                      defaultValue="Seleccione"
-                      name="Almuerzo"
+                    <input
+                      name="RutApoderado"
+                      maxLength={"8"}
                       onChange={getFormValues}
-                      id="inputHorarioLlegada"
+                      value={contacto.RutApoderado}
+                      type="text"
                       className="form-control"
-                    >
-                      <option disabled>Seleccione</option>
-                      <option value="Solo viernes">
-                        {" "}
-                        Solo voy el viernes{" "}
-                      </option>
-                      <option value="Ambos dias"> Estaré ambos días</option>
-                    </select>
+                      id="inputContactName"
+                      aria-describedby="inputName"
+                      required
+                    ></input>
+                    <p>
+                      <i>antes del dígito verificador: 12345678</i>
+                    </p>
                   </div>
+
                   <div className="form-input">
-                    <label htmlFor="inputContactState" className="form-label">
-                      ¿Desde dónde nos visitas?
+                    <label htmlFor="NumeroContacto" className="form-label">
+                      Teléfono de contacto
                     </label>
-                    <select
-                      defaultValue="Seleccione"
-                      name="iglesiaVisita"
+                    <input
+                      name="NumeroContacto"
                       onChange={getFormValues}
-                      id="inputContactState"
+                      value={contacto.NumeroContacto}
+                      type="phone"
                       className="form-control"
-                    >
-                      <option disabled>Seleccione</option>
-                      <option> IverChile</option>
-                      <option> No participa en iglesias </option>
-                      <option> Otra Iglesia </option>
-                    </select>
-                  </div>
-                  {/* {contacto.iglesiaVisita === "Otra Iglesia" ? (
-                                        <div className="form-input">
-                                            <label htmlFor="ApellidoPaterno" className="form-label">¿Puede ingresar el nombre de su iglesia?</label>
-                                            <input name="iglesiaVisita" onChange={getFormValues} placeholder="..." type="text" className="form-control" id="inputContactName" aria-describedby="inputName" required></input>
-                                        </div>
-                                    ) : ([])} */}
-                  {contacto.iglesiaVisita === "IverChile" ? (
-                    <div className="form-input">
-                      <label htmlFor="inputStaff" className="form-label">
-                        ¿Es parte de algún Staff?
-                      </label>
-                      <select
-                        defaultValue="Seleccione"
-                        name="esStaff"
-                        onChange={getFormValues}
-                        id="inputStaff"
-                        className="form-control"
-                      >
-                        <option disabled>Seleccione</option>
-                        <option> Si </option>
-                        <option> No </option>
-                      </select>
-                    </div>
-                  ) : (
-                    []
-                  )}
-                  <div className="form-input">
-                    {(contacto.iglesiaVisita === "IverChile") &
-                    (contacto.esStaff === "Si") ? (
-                      <>
-                        <label htmlFor="inputStaff" className="form-label">
-                          ¿Qué Staff integra?
-                        </label>
-                        <select
-                          defaultValue="Seleccione"
-                          name="staff"
-                          onChange={getFormValues}
-                          id="inputStaff"
-                          className="form-control"
-                        >
-                          <option disabled>Seleccione</option>
-                          <option> Media </option>
-                          <option> Cocina </option>
-                          <option> Aseo </option>
-                          <option> Seguridad </option>
-                          <option> Otro </option>
-                        </select>
-                      </>
-                    ) : (
-                      []
-                    )}
-                  </div>
-                  <div className="form-input">
-                    <label htmlFor="inputAccept" className="form-label">
-                      ¿Aceptas nuestros terminos y condiciones?
-                    </label>
-                    {/* <div class="card" style="width: 18rem;"> */}
-                    <div class="card">
-                      {/* <img src="..." class="card-img-top" alt="..." /> */}
-                      <div class="card-body">
-                        {/* <h5 class="card-title">Términos y Condiciones</h5> */}
-                        <p class="card-text">
-                          <br />
-                          1) El uso de aparatos tecnológicos está prohibido (No
-                          celulares).
-                          <br />
-                          2) Recuerda asistir con ropa cómoda, ya que estaremos
-                          haciendo muchas actividades. (Preferencia color negro)
-                          <br />
-                          3) Recuerda preparar con tiempo todo el equipamiento
-                          necesario (Carpa, Colchones, Frazadas, Linternas)
-                          <br />
-                          4) Ven dispuesto a participar en las actividades.
-                        </p>
-                        <div className="switch-container">
-                          <input
-                            type="checkbox"
-                            className="checkbox"
-                            id="checkbox"
-                            name="Accepted" // Add a name for tracking the value
-                            onChange={getFormValues}
-                          />
-                          <label className="switch" htmlFor="checkbox">
-                            <span className="slider"></span>
-                          </label>
-                        </div>
-                      </div>
-                    </div>
+                      id="inputContactPhone"
+                      aria-describedby="inputPhone"
+                    ></input>
                   </div>
                   <div className="d-grid gap-2 col-6 mx-auto">
                     {contacto.Rut &&
                     contacto.FechaNacimiento &&
                     contacto.Nombres &&
                     contacto.NumeroContacto &&
-                    contacto.iglesiaVisita &&
-                    contacto.Accepted ? (
+                    contacto.RutApoderado ? (
                       <>
                         <button
                           type="submit"

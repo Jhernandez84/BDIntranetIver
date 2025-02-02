@@ -133,7 +133,7 @@ export const Forms = () => {
       {/* <Help/> */}
       <section className="container-fluid d-flex flex-column text-center">
         <div className="container">
-          <img src="/img-lyr-sinlimites.jpeg" alt="Imagen-Contacto" />
+          <img src="/Iver_esc_entrenamiento.png" alt="Imagen-Contacto" />
         </div>
 
         <div className="container-fluid">

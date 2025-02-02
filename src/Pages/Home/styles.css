@@ -12,3 +12,11 @@
 .card-text {
   font-style: italic;
 }
+
+.card-container {
+  border-radius: 34px;
+  border-color: white;
+  background: linear-gradient(315deg, #cacaca, #f0f0f0);
+  box-shadow: -16px 0px 40px #9f9f9f, 12px 0px 40px #ffffff;
+}
+

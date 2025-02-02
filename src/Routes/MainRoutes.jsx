@@ -13,8 +13,8 @@ export const MainRoutes = () => {
         <Route path="/Home" element={<Home />} />
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/Attendance" element={<Attendance />} />
-        <Route path="/Forms" element={<Forms />} />
-        <Route path="/CampamentoJuvenil" element={<FormEntrega2 />} />
+        <Route path="/Iver_EscuelaDeEntrenamiento" element={<Forms />} />
+        <Route path="/IverKids_EscuelaInfantil" element={<FormEntrega2 />} />
         <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
     </div>
